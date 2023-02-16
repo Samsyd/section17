@@ -9,12 +9,15 @@ export default {
       areas: data.areas
     };
 
+    const token = context.rootGetters.token;
+
+    // `https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/coaches/${userId}.json`, {
+    // `https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/coaches/${userId}.json?auth=` + token, {
     const response = await fetch(
-      `https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/coaches/${userId}.json`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(coachData)
-      }
+      `https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/coaches/${userId}.json?auth=${token}`, {
+      method: 'PUT',
+      body: JSON.stringify(coachData)
+    }
     );
 
     // const responseData = await response.json();

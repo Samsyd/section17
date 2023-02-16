@@ -4,7 +4,7 @@ export default {
       userEmail: payload.email,
       message: payload.message
     };
-    const response = await fetch(`https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/reqeusts/${payload.coachId}.json`, {
+    const response = await fetch(`https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/requests/${payload.coachId}.json`, {
       method: 'POST',
       body: JSON.stringify(newRequest)
     });
@@ -23,7 +23,10 @@ export default {
   },
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
-    const response = await fetch(`https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/reqeusts/${coachId}.json`);
+    const token = context.rootGetters.token;
+    // const response = await fetch(`https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/reqeusts/${coachId}.json?auth=${token}`);
+    // console.log(`https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/reqeusts/${coachId}.json?auth=` + token)
+    const response = await fetch(`https://vue-http-demo-a18a2-default-rtdb.asia-southeast1.firebasedatabase.app/requests/${coachId}.json?auth=${token}`);
     const responseData = await response.json();
 
     if (!response.ok) {
